@@ -4,26 +4,6 @@ provider "aws" {
   region = "us-east-2"
 }
 
-data "aws_ami" "amazon_linux" {
-  most_recent = true
-
-  filter {
-    name = "name"
-
-    values = [
-      "amzn-ami-hvm-*-x86_64-gp2",
-    ]
-  }
-
-  filter {
-    name = "owner-alias"
-
-    values = [
-      "amazon",
-    ]
-  }
-}
-
 resource "aws_security_group" "IAAC" {
   name = "${var.sg_name}"
 
@@ -53,7 +33,7 @@ resource "aws_security_group" "IAAC" {
 }
 
 resource "aws_instance" "IAAC" {
-  ami                    = "${data.aws_ami.amazon_linux.id}"
+  ami                    = "ami-0b59bfac6be064b78"
   availability_zone      = "us-east-2a"
   instance_type          = "t2.micro"
   key_name               = "aws-sid-key"
