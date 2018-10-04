@@ -1,3 +1,3 @@
-output "private_ip" {
-  value = "${aws_instance.IAAC.private_ip}"
+output "public_ip" {
+  value = "${aws_instance.IAAC.public_ip}"
 }
