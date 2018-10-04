@@ -53,7 +53,6 @@ resource "aws_security_group" "IAAC" {
 }
 
 resource "aws_instance" "IAAC" {
-  count                  = "${var.count}"
   ami                    = "${data.aws_ami.amazon_linux.id}"
   availability_zone      = "us-east-2a"
   instance_type          = "t2.micro"
