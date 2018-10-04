@@ -1,13 +1,13 @@
 terraform {
   backend "s3" {
     bucket         = "iaac-tfstates"
-    region         = "us-west-2"
+    region         = "us-east-2"
     encrypt        = true
   }
 }
 
 provider "aws" {
-  region = "us-west-2"
+  region = "us-east-2"
 }
 
 data "aws_ami" "amazon_linux" {
@@ -61,7 +61,7 @@ resource "aws_security_group" "IAAC" {
 resource "aws_instance" "IAAC" {
   count                  = "${var.count}"
   ami                    = "${data.aws_ami.amazon_linux.id}"
-  availability_zone      = "us-west-2a"
+  availability_zone      = "us-east-2a"
   instance_type          = "t2.micro"
   key_name               = "aws-sid-key"
   vpc_security_group_ids = ["${aws_security_group.IAAC.id}"]
