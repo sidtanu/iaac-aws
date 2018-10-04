@@ -8,8 +8,6 @@ terraform {
 
 provider "aws" {
   region = "us-west-2"
-  access_key = "${var.access_key}"
-  secret_key = "${var.secret_key}"
 }
 
 resource "aws_security_group" "IAAC" {
@@ -53,7 +51,5 @@ resource "aws_instance" "IAAC" {
    volume_type = "gp2"
    volume_size = 20
   }
-  tags {
-   Name = "${var.tag}"
-  }
+  
  }
