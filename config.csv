@@ -1,0 +1,2 @@
+Platform,Version,PackageOnNexus,allowed_port,Infra,DB_With_TestData,S3_Storage_Account,Project,Environment,RemoveInfra,Deployment,Application_Name
+centos-nginx,1,N,80,N,N,s3storageaccount,Generic,DEV,Y,N,N
