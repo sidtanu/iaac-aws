@@ -10,6 +10,26 @@ provider "aws" {
   region = "us-west-2"
 }
 
+data "aws_ami" "amazon_linux" {
+  most_recent = true
+
+  filter {
+    name = "name"
+
+    values = [
+      "amzn-ami-hvm-*-x86_64-gp2",
+    ]
+  }
+
+  filter {
+    name = "owner-alias"
+
+    values = [
+      "amazon",
+    ]
+  }
+}
+
 resource "aws_security_group" "IAAC" {
   name = "${var.sg_name}"
 
@@ -40,10 +60,10 @@ resource "aws_security_group" "IAAC" {
 
 resource "aws_instance" "IAAC" {
   count                  = "${var.count}"
-  ami                    = "${var.ami}"
+  ami                    = "${data.aws_ami.amazon_linux.id}"
   availability_zone      = "us-west-2a"
   instance_type          = "t2.micro"
-  key_name               = "aws-key"
+  key_name               = "aws-sid-key"
   vpc_security_group_ids = ["${aws_security_group.IAAC.id}"]
   
   root_block_device {
