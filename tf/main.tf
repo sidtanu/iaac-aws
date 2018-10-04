@@ -1,10 +1,4 @@
-terraform {
-  backend "s3" {
-    bucket         = "iaac-tfstates"
-    region         = "us-east-2"
-    encrypt        = true
-  }
-}
+
 
 provider "aws" {
   region = "us-east-2"
