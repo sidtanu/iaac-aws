@@ -17,13 +17,13 @@ node {
    echo "started" 
    export VAULT_ADDR='http://127.0.0.1:8200'
    export VAULT_TOKEN="5KbSna6RMdW4FuVFuzISDXTO"
-   export AWS_ACCESS_KEY_ID="`/opt/apps/vault kv get -field="access_key_id" secret/wrtaws`"
-   export AWS_SECRET_ACCESS_KEY="`/opt/apps/vault kv get -field="secret_access_key" secret/wrtaws`"
-   export AWS_DEFAULT_REGION="`/opt/apps/vault kv get -field="default_region" secret/wrtaws`"
+   export AWS_ACCESS_KEY_ID="`/opt/vault kv get -field="access_key_id" secret/wrtaws`"
+   export AWS_SECRET_ACCESS_KEY="`/opt/vault kv get -field="secret_access_key" secret/wrtaws`"
+   export AWS_DEFAULT_REGION="`/opt/vault kv get -field="default_region" secret/wrtaws`"
    
    cd tf
-   echo `/opt/apps/terraform --version`
-   /opt/apps/terraform init
+   echo `/opt/terraform --version`
+   /opt/terraform init
     {
     while read -r line
     do
@@ -40,16 +40,16 @@ node {
 	infra=$(echo "$line" |awk -F "," '{ print $5 }')
 	
 	if [ "$infra" = "Y" ];then
-		echo "yes" | /opt/apps/terraform plan
-		echo "yes" | /opt/apps/terraform apply -var "adminPassword=Thankyou@1" -var "virtualMachineName=$platform"
+		echo "yes" | /opt/terraform plan -var "sg_name=aws-security-group-poc" -var "port=8080" -var "count=1"
+		echo "yes" | /opt/terraform apply -var "sg_name=aws-security-group-poc" -var "port=8080" -var "count=1"
 	fi
 	removeInfra=$(echo "$line" |awk -F "," '{ if ($5=="N") print $10; }')
 	echo "$removeInfra"
 	if [ "$removeInfra" = "Y" ]; then
-		echo "yes" | /opt/apps/terraform destroy
+		echo "yes" | /opt/terraform destroy
 	fi
     done
-    } < ./../../config.csv
+    } < ./../config.csv
     echo " - - - - - - C O M P L E T E D - - - - - - - "
     
     '''
