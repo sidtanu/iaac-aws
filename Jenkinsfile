@@ -40,8 +40,8 @@ node {
 	infra=$(echo "$line" |awk -F "," '{ print $5 }')
 	
 	if [ "$infra" = "Y" ];then
-		echo "yes" | /opt/terraform plan -var "sg_name=aws-security-group-poc" -var "port=8080" -var "count=1"
-		echo "yes" | /opt/terraform apply -var "sg_name=aws-security-group-poc" -var "port=8080" -var "count=1"
+		echo "yes" | /opt/terraform plan -var "sg_name=aws-security-group-poc" -var "port=8080"
+		echo "yes" | /opt/terraform apply -var "sg_name=aws-security-group-poc" -var "port=8080"
 	fi
 	removeInfra=$(echo "$line" |awk -F "," '{ if ($5=="N") print $10; }')
 	echo "$removeInfra"
