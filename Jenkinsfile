@@ -46,7 +46,7 @@ node {
 	removeInfra=$(echo "$line" |awk -F "," '{ if ($5=="N") print $10; }')
 	echo "$removeInfra"
 	if [ "$removeInfra" = "Y" ]; then
-		echo "yes" | /opt/terraform destroy
+		echo "yes" | /opt/terraform destroy -var "sg_name=aws-security-group-poc" -var "port=8080"
 	fi
     done
     } < ./../config.csv
