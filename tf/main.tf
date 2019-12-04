@@ -27,9 +27,7 @@ resource "aws_security_group" "IAAC" {
     protocol    = "-1"
     cidr_blocks = ["0.0.0.0/0"]
   }
-  tags {
-    Name = "${var.sg_name}"
-  }
+  
 }
 
 resource "aws_instance" "IAAC" {
