@@ -1,7 +1,7 @@
 
 
 provider "aws" {
-  region = "us-east-2"
+  region = "us-east-1a"
 }
 
 resource "aws_security_group" "IAAC" {
