@@ -34,7 +34,6 @@ resource "aws_instance" "IAAC" {
   ami                    = "ami-0c6956b16616620ef"
   availability_zone      = "us-east-1a"
   instance_type          = "t2.micro"
-  key_name               = "aws-sid-key"
   vpc_security_group_ids = ["${aws_security_group.IAAC.id}"]
   
   root_block_device {
