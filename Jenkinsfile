@@ -16,7 +16,7 @@ node {
     sh '''
    echo "started" 
    export VAULT_ADDR='http://127.0.0.1:8200'
-   export VAULT_TOKEN="s.Q3d2iMzJKGrxHgQMnS6q5b1y"
+   export VAULT_TOKEN="s.E5e8cyX1o6PkCk5PfaNDtu8Z"
    export AWS_ACCESS_KEY_ID="`/opt/apps/vault kv get -field="access_key_id" secret/wrtaws`"
    export AWS_SECRET_ACCESS_KEY="`/opt/apps/vault kv get -field="secret_access_key" secret/wrtaws`"
    export AWS_DEFAULT_REGION="`/opt/apps/vault kv get -field="default_region" secret/wrtaws`"
